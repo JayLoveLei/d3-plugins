@@ -43,6 +43,8 @@
         }
       });
 
+      console.log("nodes", nodes, nodes.length)
+
       nodes.forEach(function (sourceNode, a) {
         nodes.forEach(function (targetNode, b) {
           var grid = {id: nodeID(sourceNode) + "-" + nodeID(targetNode), source: sourceNode, target: targetNode, x: xScale(b), y: yScale(a), weight: 0, height: nodeHeight, width: nodeWidth};
@@ -51,7 +53,7 @@
             edgeWeight = edgeHash[grid.id].weight;
             grid.weight = edgeWeight;
           };
-          if (directed === true || grid.x < grid.y) {
+          if (directed === true || b < a) {
             matrix.push(grid);
             if (directed === false) {
               var mirrorGrid = {id: nodeID(sourceNode) + "-" + nodeID(targetNode), source: sourceNode, target: targetNode, x: xScale(a), y: yScale(b), weight: 0, height: nodeHeight, width: nodeWidth};
@@ -61,6 +63,8 @@
           }
         });
       });
+
+      console.log("matrix", matrix, matrix.length)
 
       return matrix;
     }
@@ -74,12 +78,6 @@
     matrix.size = function(x) {
       if (!arguments.length) return size;
       size = x;
-      return matrix;
-    }
-
-    matrix.width = function(x) {
-      if (!arguments.length) return width;
-      width = x;
       return matrix;
     }
 
