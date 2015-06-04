@@ -45,7 +45,7 @@
 
       nodes.forEach(function (sourceNode, a) {
         nodes.forEach(function (targetNode, b) {
-          var grid = {id: nodeID(sourceNode) + "-" + nodeID(targetNode), x: xScale(b), y: yScale(a), weight: 0, height: nodeHeight, width: nodeWidth};
+          var grid = {id: nodeID(sourceNode) + "-" + nodeID(targetNode), source: sourceNode, target: targetNode, x: xScale(b), y: yScale(a), weight: 0, height: nodeHeight, width: nodeWidth};
           var edgeWeight = 0;
           if (edgeHash[grid.id]) {
             edgeWeight = edgeHash[grid.id].weight;
@@ -54,7 +54,7 @@
           if (directed === true || grid.x < grid.y) {
             matrix.push(grid);
             if (directed === false) {
-              var mirrorGrid = {id: nodeID(sourceNode) + "-" + nodeID(targetNode), x: xScale(a), y: yScale(b), weight: 0, height: nodeHeight, width: nodeWidth};
+              var mirrorGrid = {id: nodeID(sourceNode) + "-" + nodeID(targetNode), source: sourceNode, target: targetNode, x: xScale(a), y: yScale(b), weight: 0, height: nodeHeight, width: nodeWidth};
               mirrorGrid.weight = edgeWeight;
               matrix.push(mirrorGrid);
             }
